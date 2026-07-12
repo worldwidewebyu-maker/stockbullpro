@@ -28,6 +28,7 @@ jobs:
           mkdir -p deploy-staging/public_html
           cp -r public/. deploy-staging/public_html/
           cp deploy/cpanel/public_html/index.php deploy-staging/public_html/index.php
+          cp deploy/cpanel/public_html/.htaccess deploy-staging/public_html/.htaccess
 
       - name: Deploy Laravel app to cPanel via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
