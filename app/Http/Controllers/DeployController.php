@@ -22,7 +22,7 @@ class DeployController extends Controller
 
         $commands = [
             'migrate --force' => fn () => Artisan::call('migrate', ['--force' => true]),
-            'storage:link'    => fn () => Artisan::call('storage:link', ['--force' => true]),
+            'storage:link'    => fn () => $this->ensurePublicStorageDirectory(),
             'config:cache'    => fn () => Artisan::call('config:cache'),
             'view:cache'      => fn () => Artisan::call('view:cache'),
         ];
@@ -43,5 +43,22 @@ class DeployController extends Controller
             'results' => $results,
             'ran_at'  => now()->toIso8601String(),
         ]);
+    }
+
+    /**
+     * Shared hosts often disable exec() and symlink(), and serve the app from public_html.
+     * Ensure the web-accessible storage directory exists instead of running storage:link.
+     */
+    private function ensurePublicStorageDirectory(): void
+    {
+        $path = config('filesystems.disks.public.root');
+
+        if (is_dir($path)) {
+            return;
+        }
+
+        if (! mkdir($path, 0755, true) && ! is_dir($path)) {
+            throw new \RuntimeException("Unable to create public storage directory: {$path}");
+        }
     }
 }
