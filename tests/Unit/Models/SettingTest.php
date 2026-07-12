@@ -35,6 +35,11 @@ class SettingTest extends TestCase
         Setting::set('email_verification_enabled', '0');
         $this->assertFalse(Setting::isEmailVerificationEnabled());
     }
+
+    public function test_whatsapp_url_falls_back_to_default_number(): void
+    {
+        $this->assertEquals('https://wa.me/13322830661', Setting::whatsappUrl());
+    }
 }
 
 class InvestmentPlanTest extends TestCase

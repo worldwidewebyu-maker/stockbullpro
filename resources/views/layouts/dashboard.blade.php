@@ -93,12 +93,6 @@
         <span class="nav-text">Profile</span>
       </a>
 
-      <a href="{{ route('dashboard.swap') }}"
-         class="{{ Route::is('dashboard.swap*') ? 'active' : '' }}">
-        <span class="nav-icon"><i class="bi bi-arrow-left-right"></i></span>
-        <span class="nav-text">Crypto Swap</span>
-      </a>
-
       <a href="{{ route('dashboard.transfer') }}"
          class="{{ Route::is('dashboard.transfer*') ? 'active' : '' }}">
         <span class="nav-icon"><i class="bi bi-send-fill"></i></span>
@@ -125,14 +119,10 @@
     <!-- Help card -->
     <div class="dash-help-card">
       <div class="help-icon">
-        <i class="bi {{ $whatsappLink ? 'bi-whatsapp' : 'bi-diamond-fill' }}"></i>
+        <i class="bi bi-whatsapp"></i>
       </div>
       <p>Need help?</p>
-      @if($whatsappLink)
-        <a href="{{ $whatsappLink }}" target="_blank" rel="noopener noreferrer">WHATSAPP</a>
-      @else
-        <span>SUPPORT</span>
-      @endif
+      <a href="{{ $whatsappLink }}" target="_blank" rel="noopener noreferrer">WHATSAPP</a>
     </div>
 
   </aside>

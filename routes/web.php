@@ -110,7 +110,6 @@ Route::middleware(['auth', 'verified'])
     Route::post('/profile/wallets',           [ProfileController::class, 'updateWallets'])->name('profile.wallets');
     Route::post('/profile/password',          [ProfileController::class, 'updatePassword'])->name('profile.password');
     Route::post('/profile/settings',          [ProfileController::class, 'updateSettings'])->name('profile.settings');
-    Route::get('/swap',         fn () => view('dashboard.swap'))->name('swap');
     Route::get('/transfer',     [TransferController::class, 'index'])->name('transfer');
     Route::post('/transfer',    [TransferController::class, 'submit'])->name('transfer.submit');
     Route::get('/referrals',    [ReferralController::class, 'index'])->name('referrals');

@@ -1,13 +1,22 @@
 <?php
 
-/**
- * PHPUnit uses sqlite :memory: for tests. If config:cache runs while those
- * env vars are active, Laravel keeps serving the test database locally.
- */
 $configCache = __DIR__ . '/cache/config.php';
 
 if (! is_file($configCache)) {
     return;
+}
+
+$envFile = dirname(__DIR__) . '/.env';
+
+if (is_file($envFile)) {
+    $envContents = file_get_contents($envFile);
+
+    if (preg_match('/^APP_ENV\s*=\s*([^\s#]+)/m', $envContents, $match)
+        && trim($match[1], "\"'") === 'local') {
+        @unlink($configCache);
+
+        return;
+    }
 }
 
 $configuration = @include $configCache;
@@ -19,6 +28,9 @@ if (! is_array($configuration)) {
 $default = $configuration['database']['default'] ?? null;
 $database = $configuration['database']['connections'][$default]['database'] ?? null;
 
-if ($default === 'sqlite' && $database === ':memory:') {
+$isPoisonedTestConfig = ($default === 'sqlite' && $database === ':memory:')
+    || $database === 'stockbullpro_test';
+
+if ($isPoisonedTestConfig) {
     @unlink($configCache);
 }

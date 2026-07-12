@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Cache;
 
 class Setting extends Model
 {
+    public const DEFAULT_WHATSAPP_NUMBER = '+13322830661';
+
     protected $fillable = ['key', 'value'];
 
     public $timestamps = true;
@@ -31,7 +33,7 @@ class Setting extends Model
         return filter_var(static::get('email_verification_enabled', '1'), FILTER_VALIDATE_BOOLEAN);
     }
 
-    public static function whatsappUrl(): ?string
+    public static function whatsappUrl(): string
     {
         $legacyLink = static::get('whatsapp_link');
 
@@ -39,7 +41,9 @@ class Setting extends Model
             return $legacyLink;
         }
 
-        return whatsapp_url(static::get('whatsapp_number'));
+        $number = static::get('whatsapp_number') ?: static::DEFAULT_WHATSAPP_NUMBER;
+
+        return whatsapp_url($number) ?? whatsapp_url(static::DEFAULT_WHATSAPP_NUMBER);
     }
 
     protected static function booted(): void
