@@ -39,13 +39,13 @@
 
                 <div class="col-md-6">
                     <div class="profile-field">
-                        <label>WhatsApp Support Link</label>
-                        <input type="url" name="whatsapp_link"
-                            class="profile-input @error('whatsapp_link') is-invalid @enderror"
-                            value="{{ old('whatsapp_link', $settings['whatsapp_link']) }}"
-                            placeholder="https://wa.me/1234567890">
-                        <small class="text-muted">Shown in the user dashboard sidebar support widget.</small>
-                        @error('whatsapp_link')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                        <label>WhatsApp Support Number</label>
+                        <input type="text" name="whatsapp_number"
+                            class="profile-input @error('whatsapp_number') is-invalid @enderror"
+                            value="{{ old('whatsapp_number', $settings['whatsapp_number']) }}"
+                            placeholder="+1 (332) 283-0661">
+                        <small class="text-muted">Used in the dashboard support widget and the floating WhatsApp button on the homepage.</small>
+                        @error('whatsapp_number')<div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
                 </div>
 

@@ -22,6 +22,7 @@ class DeployController extends Controller
         }
 
         $commands = [
+            'config:clear'    => fn () => Artisan::call('config:clear'),
             'migrate --force' => fn () => Artisan::call('migrate', ['--force' => true]),
             'storage:link'    => fn () => $this->ensurePublicStorageDirectory(),
             'seed-admin'      => fn () => Artisan::call('db:seed', ['--class' => AdminSeeder::class, '--force' => true]),

@@ -24,8 +24,8 @@ class AppServiceProvider extends ServiceProvider
     {
         Paginator::useBootstrapFive();
 
-        View::composer('layouts.dashboard', function ($view) {
-            $view->with('whatsappLink', Setting::get('whatsapp_link'));
+        View::composer(['layouts.dashboard', 'layouts.app'], function ($view) {
+            $view->with('whatsappLink', Setting::whatsappUrl());
         });
     }
 }

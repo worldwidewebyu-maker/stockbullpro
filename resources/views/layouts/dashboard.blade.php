@@ -131,7 +131,7 @@
       @if($whatsappLink)
         <a href="{{ $whatsappLink }}" target="_blank" rel="noopener noreferrer">WHATSAPP</a>
       @else
-        <a href="{{ route('home') }}#contact">SUPPORT</a>
+        <span>SUPPORT</span>
       @endif
     </div>
 

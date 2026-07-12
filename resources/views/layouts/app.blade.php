@@ -213,6 +213,12 @@
     <i class="bi bi-arrow-up-short"></i>
   </a>
 
+  @if($whatsappLink ?? null)
+    <a href="{{ $whatsappLink }}" class="whatsapp-float d-flex align-items-center justify-content-center" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+      <i class="bi bi-whatsapp"></i>
+    </a>
+  @endif
+
   <!-- Preloader -->
   <div id="preloader">
     <div></div>

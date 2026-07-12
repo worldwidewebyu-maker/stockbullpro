@@ -22,7 +22,7 @@ class SettingsTest extends TestCase
 
         $response = $this->actingAs($admin)->put(route('admin.settings.update'), [
             'email_verification_enabled' => '1',
-            'whatsapp_link'              => 'https://wa.me/1234567890',
+            'whatsapp_number'            => '+13322830661',
             'support_email'              => 'support@test.com',
             'referral_max_deposits'      => 5,
         ]);
@@ -31,7 +31,8 @@ class SettingsTest extends TestCase
         $response->assertSessionHas('success');
 
         $this->assertTrue(Setting::isEmailVerificationEnabled());
-        $this->assertEquals('https://wa.me/1234567890', Setting::get('whatsapp_link'));
+        $this->assertEquals('+13322830661', Setting::get('whatsapp_number'));
+        $this->assertEquals('https://wa.me/13322830661', Setting::whatsappUrl());
         $this->assertEquals('support@test.com', Setting::get('support_email'));
         $this->assertEquals('5', Setting::get('referral_max_deposits'));
     }

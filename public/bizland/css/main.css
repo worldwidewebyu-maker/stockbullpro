@@ -733,6 +733,36 @@ h6 {
   opacity: 1;
 }
 
+.whatsapp-float {
+  position: fixed;
+  right: 15px;
+  bottom: 15px;
+  z-index: 99999;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: #25d366;
+  color: #fff;
+  box-shadow: 0 4px 18px rgba(37, 211, 102, 0.45);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.whatsapp-float i {
+  font-size: 28px;
+  line-height: 0;
+}
+
+.whatsapp-float:hover {
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(37, 211, 102, 0.55);
+}
+
+.scroll-top.active ~ .whatsapp-float,
+body:has(.scroll-top.active) .whatsapp-float {
+  bottom: 65px;
+}
+
 /*--------------------------------------------------------------
 # Disable aos animation delay on mobile devices
 --------------------------------------------------------------*/

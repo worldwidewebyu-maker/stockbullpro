@@ -13,8 +13,8 @@ class SettingController extends Controller
     {
         $settings = [
             'email_verification_enabled' => Setting::isEmailVerificationEnabled(),
-            'whatsapp_link'              => Setting::get('whatsapp_link', ''),
-            'support_email'              => Setting::get('support_email', 'info@stockbullpro.com'),
+            'whatsapp_number'            => Setting::get('whatsapp_number', ''),
+            'support_email'              => Setting::get('support_email', 'info@finbullstock.com'),
             'referral_max_deposits'      => (int) Setting::get('referral_max_deposits', 3),
         ];
 
@@ -25,13 +25,14 @@ class SettingController extends Controller
     {
         $data = $request->validate([
             'email_verification_enabled' => ['nullable', 'boolean'],
-            'whatsapp_link'              => ['nullable', 'string', 'max:500'],
+            'whatsapp_number'          => ['nullable', 'string', 'max:30'],
             'support_email'              => ['required', 'email', 'max:255'],
             'referral_max_deposits'      => ['required', 'integer', 'min:0', 'max:100'],
         ]);
 
         Setting::set('email_verification_enabled', $request->boolean('email_verification_enabled') ? '1' : '0');
-        Setting::set('whatsapp_link', $data['whatsapp_link'] ?? '');
+        Setting::set('whatsapp_number', $data['whatsapp_number'] ?? '');
+        Setting::set('whatsapp_link', '');
         Setting::set('support_email', $data['support_email']);
         Setting::set('referral_max_deposits', (string) $data['referral_max_deposits']);
 

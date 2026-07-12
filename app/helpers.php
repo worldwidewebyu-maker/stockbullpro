@@ -1,5 +1,18 @@
 <?php
 
+if (! function_exists('whatsapp_url')) {
+    function whatsapp_url(?string $number = null): ?string
+    {
+        if (! $number) {
+            return null;
+        }
+
+        $digits = preg_replace('/\D+/', '', $number);
+
+        return $digits !== '' ? 'https://wa.me/' . $digits : null;
+    }
+}
+
 if (! function_exists('setting')) {
     function setting(string $key, mixed $default = null): mixed
     {

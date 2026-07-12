@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Admin;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -17,7 +17,7 @@ class AdminSeeder extends Seeder
             return;
         }
 
-        Admin::firstOrCreate(
+        User::withoutGlobalScopes()->updateOrCreate(
             ['email' => $email],
             [
                 'full_name'         => env('ADMIN_NAME', 'Site Admin'),

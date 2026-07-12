@@ -31,6 +31,17 @@ class Setting extends Model
         return filter_var(static::get('email_verification_enabled', '1'), FILTER_VALIDATE_BOOLEAN);
     }
 
+    public static function whatsappUrl(): ?string
+    {
+        $legacyLink = static::get('whatsapp_link');
+
+        if ($legacyLink) {
+            return $legacyLink;
+        }
+
+        return whatsapp_url(static::get('whatsapp_number'));
+    }
+
     protected static function booted(): void
     {
         static::saved(fn () => Cache::forget('settings.all'));
