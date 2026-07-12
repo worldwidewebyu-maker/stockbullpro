@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Database\Seeders\AdminSeeder;
+use Database\Seeders\FaqSeeder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 
@@ -26,6 +27,7 @@ class DeployController extends Controller
             'migrate --force' => fn () => Artisan::call('migrate', ['--force' => true]),
             'storage:link'    => fn () => $this->ensurePublicStorageDirectory(),
             'seed-admin'      => fn () => Artisan::call('db:seed', ['--class' => AdminSeeder::class, '--force' => true]),
+            'seed-faqs'       => fn () => Artisan::call('db:seed', ['--class' => FaqSeeder::class, '--force' => true]),
             'config:cache'    => fn () => Artisan::call('config:cache'),
             'view:cache'      => fn () => Artisan::call('view:cache'),
         ];
