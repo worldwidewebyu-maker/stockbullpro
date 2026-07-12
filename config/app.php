@@ -134,4 +134,15 @@ return [
 
     'cron_secret' => env('CRON_SECRET'),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Deploy Secret
+    |--------------------------------------------------------------------------
+    |
+    | Token required when hitting the HTTP deploy hook after FTP uploads.
+    |
+    */
+
+    'deploy_secret' => env('DEPLOY_SECRET'),
+
 ];

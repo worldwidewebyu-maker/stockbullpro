@@ -34,5 +34,6 @@
         <env name="TELESCOPE_ENABLED" value="false"/>
         <env name="NIGHTWATCH_ENABLED" value="false"/>
         <env name="CRON_SECRET" value="test-cron-secret"/>
+        <env name="DEPLOY_SECRET" value="test-deploy-secret"/>
     </php>
 </phpunit>

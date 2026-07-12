@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CronController;
+use App\Http\Controllers\DeployController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -37,6 +38,10 @@ Route::get('/terms', fn () => view('terms'))->name('terms');
 // ── Cron (secured via CRON_SECRET token) ─────────────────────
 Route::get('/cron/process-investments', [CronController::class, 'processInvestments'])
     ->name('cron.process-investments');
+
+// ── Deploy hook (secured via DEPLOY_SECRET token) ─────────────
+Route::get('/deploy/run', [DeployController::class, 'run'])
+    ->name('deploy.run');
 
 // ── Auth (guests only) ───────────────────────────────────────
 Route::middleware('guest')->group(function () {
