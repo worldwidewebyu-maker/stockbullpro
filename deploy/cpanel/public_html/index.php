@@ -11,6 +11,8 @@ if (file_exists($maintenance = __DIR__.'/../stockbullpro/storage/framework/maint
 
 require __DIR__.'/../stockbullpro/vendor/autoload.php';
 
+require __DIR__.'/../stockbullpro/bootstrap/ensure_local_config.php';
+
 /** @var Application $app */
 $app = require_once __DIR__.'/../stockbullpro/bootstrap/app.php';
 
