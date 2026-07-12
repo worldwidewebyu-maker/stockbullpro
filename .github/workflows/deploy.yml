@@ -23,7 +23,13 @@ jobs:
       - name: Install Composer dependencies
         run: composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
 
-      - name: Deploy to cPanel via FTP
+      - name: Prepare public_html payload
+        run: |
+          mkdir -p deploy-staging/public_html
+          cp -r public/. deploy-staging/public_html/
+          cp deploy/cpanel/public_html/index.php deploy-staging/public_html/index.php
+
+      - name: Deploy Laravel app to cPanel via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
@@ -48,7 +54,48 @@ jobs:
             **/.phpunit.cache/**
             **/.phpunit.result.cache/**
             **/.claude/**
+            **/deploy/**
+
+      - name: Deploy public assets to public_html via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          port: ${{ secrets.FTP_PORT || 21 }}
+          protocol: ftp
+          local-dir: deploy-staging/public_html/
+          server-dir: ${{ secrets.FTP_PUBLIC_DIR || '/public_html/' }}
+          dangerous-clean-slate: false
+
+      - name: Verify Laravel is serving the domain
+        run: |
+          APP_URL="${{ secrets.APP_URL }}"
+          APP_URL="${APP_URL%/}"
+          BODY="$(curl -fsS "$APP_URL/" || true)"
+          if echo "$BODY" | grep -q "LiteSpeed Web Server"; then
+            echo "::error::The domain is not routing through public_html/index.php yet."
+            echo "Ensure public_html has the bootstrap index.php and .htaccess from deploy/cpanel/public_html."
+            exit 1
+          fi
+          if echo "$BODY" | grep -q "require a PHP version"; then
+            echo "::error::Server PHP is below 8.3. In cPanel → Select PHP Version, set the domain to PHP 8.3+."
+            exit 1
+          fi
+          if [ -z "$BODY" ]; then
+            echo "::error::Homepage returned an empty response."
+            exit 1
+          fi
 
       - name: Run post-deploy commands on server
         run: |
-          curl -fsS "${{ secrets.APP_URL }}/deploy/run?token=${{ secrets.DEPLOY_SECRET }}"
+          APP_URL="${{ secrets.APP_URL }}"
+          APP_URL="${APP_URL%/}"
+          RESPONSE="$(curl -sS -w "\n%{http_code}" "$APP_URL/deploy/run?token=${{ secrets.DEPLOY_SECRET }}")"
+          HTTP_CODE="$(echo "$RESPONSE" | tail -n1)"
+          BODY="$(echo "$RESPONSE" | sed '$d')"
+          echo "$BODY"
+          if [ "$HTTP_CODE" != "200" ]; then
+            echo "::error::Deploy hook returned HTTP $HTTP_CODE"
+            exit 1
+          fi
