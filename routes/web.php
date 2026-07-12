@@ -27,9 +27,22 @@ use App\Http\Controllers\Admin\ReferralController as AdminReferralController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\MailController;
+use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
+use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
 use Illuminate\Http\Request;
+use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Support\Facades\Route;
+use Illuminate\View\Middleware\ShareErrorsFromSession;
+
+$statelessHookMiddleware = [
+    EncryptCookies::class,
+    AddQueuedCookiesToResponse::class,
+    StartSession::class,
+    ShareErrorsFromSession::class,
+    PreventRequestForgery::class,
+];
 
 // ── Guest pages ──────────────────────────────────────────────
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -37,10 +50,12 @@ Route::get('/terms', fn () => view('terms'))->name('terms');
 
 // ── Cron (secured via CRON_SECRET token) ─────────────────────
 Route::get('/cron/process-investments', [CronController::class, 'processInvestments'])
+    ->withoutMiddleware($statelessHookMiddleware)
     ->name('cron.process-investments');
 
 // ── Deploy hook (secured via DEPLOY_SECRET token) ─────────────
 Route::get('/deploy/run', [DeployController::class, 'run'])
+    ->withoutMiddleware($statelessHookMiddleware)
     ->name('deploy.run');
 
 // ── Auth (guests only) ───────────────────────────────────────
