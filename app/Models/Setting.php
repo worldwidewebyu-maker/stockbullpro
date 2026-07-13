@@ -9,6 +9,8 @@ class Setting extends Model
 {
     public const DEFAULT_WHATSAPP_NUMBER = '+13322830661';
 
+    public const DEFAULT_TELEGRAM_USERNAME = 'finstockbullcomsupport';
+
     protected $fillable = ['key', 'value'];
 
     public $timestamps = true;
@@ -44,6 +46,13 @@ class Setting extends Model
         $number = static::get('whatsapp_number') ?: static::DEFAULT_WHATSAPP_NUMBER;
 
         return whatsapp_url($number) ?? whatsapp_url(static::DEFAULT_WHATSAPP_NUMBER);
+    }
+
+    public static function telegramUrl(): string
+    {
+        $username = static::get('telegram_username') ?: static::DEFAULT_TELEGRAM_USERNAME;
+
+        return telegram_url($username) ?? telegram_url(static::DEFAULT_TELEGRAM_USERNAME);
     }
 
     protected static function booted(): void

@@ -51,6 +51,18 @@
 
                 <div class="col-md-6">
                     <div class="profile-field">
+                        <label>Telegram Support Username</label>
+                        <input type="text" name="telegram_username"
+                            class="profile-input @error('telegram_username') is-invalid @enderror"
+                            value="{{ old('telegram_username', $settings['telegram_username']) }}"
+                            placeholder="@finstockbullcomsupport">
+                        <small class="text-muted">Used in the dashboard support widget and the floating Telegram button on the homepage.</small>
+                        @error('telegram_username')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="profile-field">
                         <label>Support Email <span style="color:var(--dash-pink);">*</span></label>
                         <input type="email" name="support_email"
                             class="profile-input @error('support_email') is-invalid @enderror"

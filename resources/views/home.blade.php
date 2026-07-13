@@ -482,7 +482,7 @@
               <i class="bi bi-envelope flex-shrink-0"></i>
               <div>
                 <h3>Email Us</h3>
-                <p>info@stockbullpro.com</p>
+                <p>info@finstockbull.com</p>
               </div>
             </div>
             <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">

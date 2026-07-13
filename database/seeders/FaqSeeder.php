@@ -40,7 +40,7 @@ class FaqSeeder extends Seeder
             ],
             [
                 'question' => 'How do I contact customer support?',
-                'answer'   => 'Our customer support team is available 24/7. You can reach us via email at info@stockbullpro.com, through the live chat feature on our platform, or by submitting a message through the contact form on this page. We aim to respond within a few hours.',
+                'answer'   => 'Our customer support team is available 24/7. You can reach us via email at info@finxstockbull.com, through the live chat feature on our platform, or by submitting a message through the contact form on this page. We aim to respond within a few hours.',
             ],
         ];
 

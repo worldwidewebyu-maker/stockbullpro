@@ -40,6 +40,11 @@ class SettingTest extends TestCase
     {
         $this->assertEquals('https://wa.me/13322830661', Setting::whatsappUrl());
     }
+
+    public function test_telegram_url_falls_back_to_default_username(): void
+    {
+        $this->assertEquals('https://t.me/finstockbullcomsupport', Setting::telegramUrl());
+    }
 }
 
 class InvestmentPlanTest extends TestCase

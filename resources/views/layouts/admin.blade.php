@@ -6,6 +6,8 @@
   <title>@yield('title', 'Admin') - Bull Pro</title>
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
+  @include('partials.favicons')
+
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <link href="{{ asset('bizland/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">

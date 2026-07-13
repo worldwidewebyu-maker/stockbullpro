@@ -14,6 +14,7 @@ class SettingController extends Controller
         $settings = [
             'email_verification_enabled' => Setting::isEmailVerificationEnabled(),
             'whatsapp_number'            => Setting::get('whatsapp_number', Setting::DEFAULT_WHATSAPP_NUMBER),
+            'telegram_username'          => Setting::get('telegram_username', Setting::DEFAULT_TELEGRAM_USERNAME),
             'support_email'              => Setting::get('support_email', 'info@finbullstock.com'),
             'referral_max_deposits'      => (int) Setting::get('referral_max_deposits', 3),
         ];
@@ -26,6 +27,7 @@ class SettingController extends Controller
         $data = $request->validate([
             'email_verification_enabled' => ['nullable', 'boolean'],
             'whatsapp_number'          => ['nullable', 'string', 'max:30'],
+            'telegram_username'        => ['nullable', 'string', 'max:50'],
             'support_email'              => ['required', 'email', 'max:255'],
             'referral_max_deposits'      => ['required', 'integer', 'min:0', 'max:100'],
         ]);
@@ -33,6 +35,7 @@ class SettingController extends Controller
         Setting::set('email_verification_enabled', $request->boolean('email_verification_enabled') ? '1' : '0');
         Setting::set('whatsapp_number', $data['whatsapp_number'] ?: Setting::DEFAULT_WHATSAPP_NUMBER);
         Setting::set('whatsapp_link', '');
+        Setting::set('telegram_username', $data['telegram_username'] ?: Setting::DEFAULT_TELEGRAM_USERNAME);
         Setting::set('support_email', $data['support_email']);
         Setting::set('referral_max_deposits', (string) $data['referral_max_deposits']);
 

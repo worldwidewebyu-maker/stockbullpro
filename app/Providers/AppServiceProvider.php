@@ -26,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
 
         View::composer(['layouts.dashboard', 'layouts.app'], function ($view) {
             $view->with('whatsappLink', Setting::whatsappUrl());
+            $view->with('telegramLink', Setting::telegramUrl());
         });
     }
 }

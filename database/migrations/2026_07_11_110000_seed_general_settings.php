@@ -10,7 +10,7 @@ return new class extends Migration
         $defaults = [
             'email_verification_enabled' => '1',
             'whatsapp_link'              => '',
-            'support_email'              => 'info@stockbullpro.com',
+            'support_email'              => 'info@finxstockbull.com',
         ];
 
         foreach ($defaults as $key => $value) {

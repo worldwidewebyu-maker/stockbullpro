@@ -8,9 +8,7 @@
   <meta name="description" content="@yield('description', 'Trade stocks, ETFs, and cryptocurrencies with Bull Pro advanced trading platform.')">
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <!-- Favicon -->
-  <link href="{{ asset('bizland/img/favicon.png') }}" rel="icon">
-  <link href="{{ asset('bizland/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+  @include('partials.favicons')
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -82,7 +80,7 @@
       <div class="container d-flex justify-content-center justify-content-md-between">
         <div class="contact-info d-flex align-items-center">
           <i class="bi bi-envelope d-flex align-items-center">
-            <a href="mailto:info@stockbullpro.com">info@stockbullpro.com</a>
+            <a href="mailto:info@finxstockbull.com">info@finxstockbull.com</a>
           </i>
         </div>
         <div class="social-links d-none d-md-flex align-items-center">
@@ -171,7 +169,7 @@
             <span class="sitename">BullPro</span>
           </a>
           <div class="footer-contact pt-3">
-            <p><strong>Email:</strong> <span>info@stockbullpro.com</span></p>
+            <p><strong>Email:</strong> <span>info@finxstockbull.com</span></p>
           </div>
           <div class="social-links d-flex mt-3">
             <a href=""><i class="bi bi-twitter-x"></i></a>
@@ -211,6 +209,10 @@
   <!-- Scroll Top -->
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center">
     <i class="bi bi-arrow-up-short"></i>
+  </a>
+
+  <a href="{{ $telegramLink }}" class="telegram-float d-flex align-items-center justify-content-center" target="_blank" rel="noopener noreferrer" aria-label="Chat on Telegram">
+    <i class="bi bi-telegram"></i>
   </a>
 
   <a href="{{ $whatsappLink }}" class="whatsapp-float d-flex align-items-center justify-content-center" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">

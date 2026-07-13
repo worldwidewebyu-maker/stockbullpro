@@ -1,5 +1,18 @@
 <?php
 
+if (! function_exists('telegram_url')) {
+    function telegram_url(?string $username = null): ?string
+    {
+        if (! $username) {
+            return null;
+        }
+
+        $username = ltrim($username, '@');
+
+        return $username !== '' ? 'https://t.me/' . $username : null;
+    }
+}
+
 if (! function_exists('whatsapp_url')) {
     function whatsapp_url(?string $number = null): ?string
     {

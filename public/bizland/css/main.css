@@ -765,6 +765,38 @@ h6 {
   bottom: 65px;
 }
 
+.telegram-float {
+  position: fixed;
+  left: 15px;
+  bottom: 15px;
+  z-index: 100000;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: #229ED9;
+  color: #fff;
+  box-shadow: 0 4px 18px rgba(34, 158, 217, 0.45);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.telegram-float i {
+  font-size: 28px;
+  line-height: 0;
+}
+
+.telegram-float:hover,
+.telegram-float:focus {
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(34, 158, 217, 0.55);
+}
+
+.scroll-top.active ~ .telegram-float {
+  bottom: 65px;
+}
+
 @media screen and (max-width: 768px) {
   .whatsapp-float {
     display: flex !important;
@@ -777,6 +809,20 @@ h6 {
   }
 
   .scroll-top.active ~ .whatsapp-float {
+    bottom: calc(70px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .telegram-float {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    left: 16px;
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+    width: 56px;
+    height: 56px;
+  }
+
+  .scroll-top.active ~ .telegram-float {
     bottom: calc(70px + env(safe-area-inset-bottom, 0px));
   }
 }

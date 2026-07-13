@@ -6,6 +6,8 @@
   <title>@yield('title', 'Dashboard') - Bull Pro</title>
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
+  @include('partials.favicons')
+
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
@@ -118,11 +120,15 @@
 
     <!-- Help card -->
     <div class="dash-help-card">
-      <div class="help-icon">
-        <i class="bi bi-whatsapp"></i>
+      <div class="help-icons">
+        <span class="help-icon"><i class="bi bi-whatsapp"></i></span>
+        <span class="help-icon"><i class="bi bi-telegram"></i></span>
       </div>
       <p>Need help?</p>
-      <a href="{{ $whatsappLink }}" target="_blank" rel="noopener noreferrer">WHATSAPP</a>
+      <div class="help-links">
+        <a href="{{ $whatsappLink }}" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        <a href="{{ $telegramLink }}" target="_blank" rel="noopener noreferrer">Telegram</a>
+      </div>
     </div>
 
   </aside>
