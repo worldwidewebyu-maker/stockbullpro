@@ -9,7 +9,7 @@ class Setting extends Model
 {
     public const DEFAULT_WHATSAPP_NUMBER = '+13322830661';
 
-    public const DEFAULT_TELEGRAM_USERNAME = 'finstockbullcomsupport';
+    public const DEFAULT_TELEGRAM_USERNAME = 'finxstockbullcomsupport';
 
     protected $fillable = ['key', 'value'];
 

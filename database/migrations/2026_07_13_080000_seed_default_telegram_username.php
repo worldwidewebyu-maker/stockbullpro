@@ -10,7 +10,7 @@ return new class extends Migration
         if (! DB::table('settings')->where('key', 'telegram_username')->exists()) {
             DB::table('settings')->insert([
                 'key'        => 'telegram_username',
-                'value'      => 'finstockbullcomsupport',
+                'value'      => 'finxstockbullcomsupport',
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

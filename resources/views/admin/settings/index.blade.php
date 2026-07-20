@@ -55,7 +55,7 @@
                         <input type="text" name="telegram_username"
                             class="profile-input @error('telegram_username') is-invalid @enderror"
                             value="{{ old('telegram_username', $settings['telegram_username']) }}"
-                            placeholder="@finstockbullcomsupport">
+                            placeholder="@finxstockbullcomsupport">
                         <small class="text-muted">Used in the dashboard support widget and the floating Telegram button on the homepage.</small>
                         @error('telegram_username')<div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>

@@ -43,7 +43,7 @@ class SettingTest extends TestCase
 
     public function test_telegram_url_falls_back_to_default_username(): void
     {
-        $this->assertEquals('https://t.me/finstockbullcomsupport', Setting::telegramUrl());
+        $this->assertEquals('https://t.me/finxstockbullcomsupport', Setting::telegramUrl());
     }
 }
 
