@@ -23,6 +23,7 @@ use App\Http\Controllers\Admin\WithdrawalMethodController;
 use App\Http\Controllers\Admin\WithdrawalRequestController;
 use App\Http\Controllers\Admin\TransactionController as AdminTransactionController;
 use App\Http\Controllers\Admin\InvestmentController as AdminInvestmentController;
+use App\Http\Controllers\Admin\InvestmentPlanController;
 use App\Http\Controllers\Admin\ReferralController as AdminReferralController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\FaqController;
@@ -157,6 +158,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // Transaction history (global ledger)
         Route::get('/transactions', [AdminTransactionController::class, 'index'])->name('transactions.index');
+
+        // Investment plans
+        Route::post('/investment-plans/{investmentPlan}/toggle', [InvestmentPlanController::class, 'toggle'])->name('investment-plans.toggle');
+        Route::resource('investment-plans', InvestmentPlanController::class)->except(['show']);
 
         // Investment logs
         Route::get('/investments', [AdminInvestmentController::class, 'index'])->name('investments.index');

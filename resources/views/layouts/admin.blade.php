@@ -70,6 +70,12 @@
         <span class="nav-text">Withdrawal Logs</span>
       </a>
 
+      <a href="{{ route('admin.investment-plans.index') }}"
+         class="{{ Route::is('admin.investment-plans.*') ? 'active' : '' }}">
+        <span class="nav-icon"><i class="bi bi-boxes"></i></span>
+        <span class="nav-text">Investment Plans</span>
+      </a>
+
       <a href="{{ route('admin.investments.index') }}"
          class="{{ Route::is('admin.investments.*') ? 'active' : '' }}">
         <span class="nav-icon"><i class="bi bi-graph-up-arrow"></i></span>
